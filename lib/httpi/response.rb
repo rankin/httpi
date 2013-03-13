@@ -16,14 +16,14 @@ module HTTPI
     SuccessfulResponseCodes = 200..299
 
     # Initializer expects an HTTP response +code+, +headers+ and +body+.
-    def initialize(code, headers, body, http)
+    def initialize(code, headers, body, http_response)
       self.code = code.to_i
       self.headers = Rack::Utils::HeaderHash.new(headers)
       self.raw_body = body
-      self.http = http
+      self.http_response = http_response
     end
 
-    attr_accessor :code, :headers, :raw_body, :attachments, :http
+    attr_accessor :code, :headers, :raw_body, :attachments, :http_response
 
     # Returns whether the HTTP response is considered successful.
     def error?
@@ -53,7 +53,12 @@ module HTTPI
     end
 
     attr_writer :body
-    
+
+    # Returns the HTTP response itself
+    def http_adapter_response
+      @http_response
+    end
+
     private
 
     def decode_body

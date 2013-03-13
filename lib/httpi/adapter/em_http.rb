@@ -100,7 +100,7 @@ module HTTPI
         raise TimeoutError, "EM-HTTP-Request connection timed out: #{Time.now - start_time} sec" if http.response_header.status.zero?
 
         Response.new http.response_header.status,
-          convert_headers(http.response_header), http.response
+          convert_headers(http.response_header), http.response, http
       end
 
       def build_request_url(url)

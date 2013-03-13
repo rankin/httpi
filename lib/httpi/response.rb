@@ -54,11 +54,6 @@ module HTTPI
 
     attr_writer :body
 
-    # Returns the HTTP response itself
-    def http_adapter_response
-      @http_response
-    end
-
     private
 
     def decode_body
